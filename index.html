@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía SS Milagros</title>
+    <link rel="icon" href="arefy.png" type="image/png">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-724N3MWGF2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-724N3MWGF2');
+    </script>
+
+    <script>
+        function blockKeys(e) {
+            var sel = window.getSelection();
+            var el = sel.anchorNode ? sel.anchorNode.parentElement : null;
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+                if (el && (el.tagName === 'CODE' || el.tagName === 'A')) return true;
+                alert('Copiar no está permitido, excepto para rutas, comandos y enlaces.');
+                e.preventDefault();
+            }
+            if ((e.ctrlKey || e.metaKey) && ['p', 's'].includes(e.key.toLowerCase())) {
+                alert('Imprimir o guardar no está permitido.');
+                e.preventDefault();
+            }
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                alert('Inspeccionar el código no está permitido.');
+                e.preventDefault();
+            }
+        }
+
+        function checkCopy(e) {
+            var sel = window.getSelection();
+            var el = sel.anchorNode ? sel.anchorNode.parentElement : null;
+            if (el && (el.tagName === 'CODE' || el.tagName === 'A')) return true;
+            alert('Copiar no está permitido, excepto para rutas, comandos y enlaces.');
+            e.preventDefault();
+        }
+
+        document.oncontextmenu = function() { alert('El clic derecho está deshabilitado.'); return false; };
+        document.onkeydown = blockKeys;
+        document.oncopy = checkCopy;
+    </script>
+    
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            position: relative;
+        }
+        code, a {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        header {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-family: 'Arial', sans-serif;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        nav {
+            background: #262626;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-container {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 8px 12px;
+            background: #404040;
+            color: #fff;
+            border: 1px solid #ff4d4d;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        #searchBar:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 77, 77, 0.7);
+            background: #4a4a4a;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 15px;
+            background: #333333;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #ff4d4d;
+            background: #404040;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(255, 77, 77, 0.5);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #252525;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 1;
+            display: none;
+            transition: box-shadow 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0 0 25px rgba(255, 77, 77, 0.5);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #fff;
+            border-bottom: 2px solid #ff4d4d;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #d9d9d9;
+            margin-top: 20px;
+        }
+        code {
+            background: #404040;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #ff9999;
+        }
+        pre {
+            background: #333333;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+            color: #e0e0e0;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            border: 1px solid #404040;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 95%;
+            border-top: 2px solid #ff4d4d;
+            box-shadow: 0 -2px 10px rgba(255, 77, 77, 0.3);
+        }
+        
+        footer p {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .update-info {
+            color: #d9d9d9;
+        }
+        
+        .separator {
+            color: #ff4d4d;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+        }
+        
+        .creator {
+            color: #ff4d4d;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        footer p:hover .creator {
+            color: #fff;
+        }
+        
+        @media (max-width: 480px) {
+            footer p {
+                font-size: 0.9em;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .separator {
+                font-size: 1em;
+            }
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            z-index: 9999;
+            pointer-events: none;
+        }
+        @media print {
+            body, .container {
+                display: none !important;
+            }
+        }
+        #passwordPrompt {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            text-align: center;
+            color: #e0e0e0;
+            border: 1px solid #ff4d4d;
+            display: block;
+        }
+        #passwordPrompt h2 {
+            color: #ff4d4d;
+        }
+        #passwordPrompt input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ff4d4d;
+            border-radius: 4px;
+            background: #404040;
+            color: #fff;
+        }
+        #passwordPrompt button {
+            padding: 10px 20px;
+            background: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        #passwordPrompt button:hover {
+            background: #cc0000;
+            transform: scale(1.05);
+        }
+        #particlesCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 16px;
+            background: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        #scrollTop:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+        
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10001;
+            text-align: center;
+            overflow: auto;
+        }
+        
+        #lightboxImg {
+            max-width: 85%;
+            max-height: 85%;
+            margin: 5vh auto;
+            display: block;
+            border: 2px solid #ff4d4d;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5em; }
+            nav { padding: 10px; }
+            .nav-links { gap: 10px; }
+            .nav-links a { padding: 6px 12px; font-size: 0.9em; }
+            #searchBar { max-width: 250px; }
+            .container { margin: 5px; padding: 10px; }
+            h2 { font-size: 1.3em; }
+            h3 { font-size: 1.1em; }
+            pre, code { font-size: 0.75em; word-break: break-word; }
+            #passwordPrompt { padding: 10px; width: 85%; }
+            #passwordPrompt input { width: 90%; padding: 6px; }
+            #passwordPrompt button { padding: 6px 12px; }
+        }
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.2em; }
+            .nav-links { flex-direction: column; align-items: center; }
+            .nav-links a { width: 80%; text-align: center; }
+            .container { padding: 8px; }
+            footer { padding: 10px; font-size: 0.8em; }
+        }
+
+        .highlight {
+            background-color: yellow;
+            color: black;
+            padding: 2px;
+            border-radius: 3px;
+        }
+    </style>
+    
+</head>
+<body oncontextmenu="alert('El clic derecho está deshabilitado.'); return false;" 
+      onkeydown="blockKeys(event);" 
+      oncopy="checkCopy(event);">
+    <div class="overlay"></div>
+    <div id="passwordPrompt">
+        <h2>Ingrese la Contraseña</h2>
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <br>
+        <button id="accessButton">Acceder</button>
+    </div>
+    <canvas id="particlesCanvas"></canvas>
+    <header>
+        <h1>Guía Completa de Screenshare</h1>
+    </header>
+<nav>
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Buscar en la guía...">
+    </div>
+    <div class="nav-links">
+        <a href="#notas">Notas</a>
+        <a href="#hacks">Lista de Clientes Ilegales</a>
+        <a href="#ip">Evitar Robo de IP</a>
+        <a href="#metodos">Métodos Generales</a>
+        <a href="#regedit">Regedit</a>
+        <a href="#powershell">PowerShell</a>
+        <a href="#dps">DPS</a>
+        <a href="#executedprogramslist">ExecutedProgramsList</a>
+        <a href="#winprefetch">WinPrefetch</a>
+        <a href="#processhacker">ProcessHacker</a>
+        <a href="#lastactivityview">LastActivityView</a>
+        <a href="#usbdeview">USBDeview</a>
+        <a href="#dlls">DLLs</a>
+        <a href="#discord">Discord</a>
+        <a href="#macros">Macros</a>
+        <a href="#linux">Linux</a>
+        <a href="#extras">Extras</a>
+    </div>
+</nav>
+
+    <div class="container" id="content">
+        <div class="section" id="notas">
+            <h2>Notas Iniciales</h2>
+            <li>Asegurarse de que la persona no esté grabando. Revisar AnyDesk, Administrador de Tareas y extensiones de Google Chrome u otro navegador. Si tiene OBS, abrirlo para verificar que no esté grabando y cerrar el proceso.</li>
+            <li>Abrir Administrador de Tareas y verificar que no haya programas que puedan crashear o cerrar la sesión.</li>
+            <li>Siempre grabar cada SS, ya sea con OBS o AnyDesk.</li>
+            <li>Usar una VPN al hacer una SS o desactivar la conexión directa para evitar que saquen la IP mediante AnyDesk.</li>
+        </div>
+
+
+        <div class="section" id="hacks">
+        <h2>Clientes, Hacks, DLLs Detectables</h2>
+        <p>A continuación se listan clientes hackeados, ghost clients y DLLs inyectables comunes en Minecraft. Estos pueden detectarse en SS, pero existen muchos más, usando las herramientas descritas en esta guía las encontrarás si buscas correctamente.</p>
+    
+        <h3>Clientes Hackeados</h3>
+        <p>Clientes completos con hacks integrados que modifican el juego. No siempre están diseñados para evadir SS.</p>
+        <ul>
+            <li><strong>Huzuni</strong>: Cliente hackeado para 1.7.10/1.8.9 con GUI (Shift derecho). Incluye KillAura, X-Ray, Fly, AutoClicker y más. Rastros en <code>Prefetch</code>.</li>
+            <li><strong>Wurst</strong>: Cliente gratuito y de código abierto, configurable y con soporte Forge. Ofrece desde Fly hasta X-Ray. Rastros en <code>Prefetch</code>.</li>
+            <li><strong>LiquidBounce</strong>: Cliente open-source con opciones blatant y algunas funciones ghost. Compatible con varias versiones; buscar <code>LiquidBounce.jar</code>.</li>
+            <li><strong>Aristois</strong>: Cliente gratuito con soporte para 1.8.9 a 1.21. Incluye KillAura, ESP y módulos de utilidad. Detectable como <code>Aristois.jar</code> o en procesos Java.</li>
+            <li><strong>Meteor</strong>: Cliente moderno para Fabric con addons opcionales. Popular en anarchy; buscar <code>Meteor.jar</code> o módulos en <code>%appdata%</code>.</li>
+            <li><strong>Konas</strong>: Cliente privado (versiones archivadas gratis), usado en anarchy. Incluye hacks avanzados; revisar <code>Konas.jar</code> o logs.</li>
+            <li><strong>Rise</strong>: Cliente híbrido con soporte para scripts. Ofrece KillAura y Speed; detectable en <code>shell:recent</code>.</li>
+            <li><strong>Nodus</strong>: Cliente clásico, ahora obsoleto. Fue popular en 1.5.2/1.7.10; buscar <code>Nodus.jar</code>.</li>
+            <li><strong>Raven (B3, B+)</strong>: Cliente gratuito básico para 1.8.9. Incluye AutoClicker y Reach; revisar <code>Raven.jar</code>.</li>
+        </ul>
+    
+        <h3>Ghost Clients</h3>
+        <p>Clientes diseñados para ser discretos y evadir detección en SS o anticheats.</p>
+        <ul>
+            <li><strong>Vape (V4, Lite)</strong>: Diseñado para discreción y bypass SS. Vape V4 es completo, Lite es más ligero. Buscar <code>Vape.dll</code> o rastros en <code>javaw.exe</code>.</li>
+            <li><strong>Drip</strong>: Premium con protección avanzada contra SS. Incluye visuales falsos; revisar procesos con strings <code>Drip</code>.</li>
+            <li><strong>Slinky</strong>: Enfocado en PvP sin protección SS fuerte. Buscar <code>slinkyloader</code> o actividad sospechosa en memoria.</li>
+            <li><strong>Crim</strong>: Autoclick inyectado con reducción de Knockback (KB). Buscar <code>crim.exe</code> o actividad sospechosa en memoria.</li>
+        </ul>
+        <p>Nota: Usa ProcessHacker para filtrar strings como <code>Vape</code> o <code>Crim</code> en procesos activos.</p>
+    
+        <h3>DLLs Inyectables</h3>
+        <p>Librerías inyectadas en procesos de Minecraft para añadir hacks específicos.</p>
+        <ul>
+            <li><strong>420.dll</strong>: Autoclicker inyectado. Detectable en memoria con <code>ProcessHacker > Strings > 420</code>.</li>
+            <li><strong>ARTEX64.dll</strong>: Similar a 420.dll, usado para clics automáticos. Buscar en <code>Regedit > OpenSavePidlMRU\dll</code>.</li>
+        </ul>
+        <p>Si encuentras estas DLLs en SS, sancionar al usuario.</p>
+            
+    </div>
+        <div class="section" id="ip">
+            <h2>Evitar Robo de IP</h2>
+            <p>Aunque se sugiere usar VPN, también puedes desactivar la conexión directa en AnyDesk:</p>
+            <img src="https://i.imgur.com/8jdIPL4.png" alt="Configuración de AnyDesk">
+            <li>La primera opción aparecerá activada; desmarcarla.</li>
+            
+            <h3>Grabación</h3>
+            <img src="https://i.imgur.com/sg1StVp.png" alt="Configuración de AnyDesk">
+            <li>Entrar al AnyDesk del usuario y verificar que no esté grabando.</li>
+            <li>Las primeras 3 opciones en la configuración deben estar desmarcadas.</li>
+            
+        </div>
+
+        <div class="section" id="metodos">
+            <h2>Métodos Generales</h2>
+            <h3>Papelera de Reciclaje</h3>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>C:\$Recycle.Bin</code></p>
+            <img src="https://i.imgur.com/vc3TPxj.png" alt="Papelera de Reciclaje">
+            <p>Comparar la fecha de modificación con la fecha y hora actual. Si modificó o borró algo recientemente, ban por “Modificaciones en SS”.</p>
+
+            <h3>Elementos Recientes</h3>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>shell:recent</code></p>
+            <img src="https://i.imgur.com/JZPhNcb.png" alt="Elementos Recientes">
+            <p>Revisar lo abierto recientemente. Si aparece un clicker o cheat en Java, banear. Cheats en C++ (Vape, Dream, Slinky, Cucklord) no aparecerán por sus self-destruct.</p>
+
+            <h3>Prefetch</h3>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>Prefetch</code></p>
+            <img src="https://i.imgur.com/zeWEynR.png" alt="Prefetch">
+            <p>Buscar logs de archivos .exe ejecutados recientemente.</p>
+
+            <h3>Archivos Temporales (Tempdata)</h3>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>%temp%</code></p>
+            <img src="https://i.imgur.com/hqa4Udp.png" alt="Archivos temporales">
+            <p>Si aparece “JNATIVEHOOK” (log de autoclickers en Java), ban por “Modificaciones en SS”.</p>
+        </div>
+
+        <div class="section" id="regedit">
+            <h2>Regedit</h2>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>regedit</code></p>
+            <h3>Revisión de DLLs</h3>
+            <p>Ir a: <code>Equipo\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU\dll</code></p>
+            <p>Click derecho en la carpeta “dll” > Exportar. Abrir el .txt generado y revisar los .dll listados.</p>
+            <img src="https://i.imgur.com/qFZ4Neu.png" alt="DLLs">
+            <img src="https://i.imgur.com/oHmiQqO.png" alt="DLLs">
+            <img src="https://i.imgur.com/uNaP8lo.png" alt="DLLs">
+            <img src="https://i.imgur.com/Ut35a5x.png" alt="DLLs">
+            <h3>Revisión de EXEs</h3>
+            <p>Ir a: <code>Equipo\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU\exe</code></p>
+            <p>Click derecho en la carpeta “exe” > Exportar. Abrir el .txt generado y revisar los .exe listados.</p>
+            <img src="https://i.imgur.com/jOjudKG.png" alt="EXEs">
+            <img src="https://i.imgur.com/oHmiQqO.png" alt="EXEs">
+            <img src="https://i.imgur.com/PPmoRIH.png" alt="EXEs">
+
+            <p>Vamos al PH2 (Siempre ejecutar en administrador el PH2) y buscamos en el proceso ENG</p>
+            <img src="https://i.imgur.com/AzeHg3k.png" alt="PH2">
+            <p>Buscamos como como en todos los procesos (javaw, explorer)</p>
+            <p>Click derecho sobre este, Propiedades - desmarcamos la casilla de “Hide free regions” - Strings y marcamos todas las casillas y cambiamos el 10 por un 4 y le damos a Filter y “Contains (case-insensitive)”</p>
+            <p>Primera String: <code>C:\</p></code>
+            <p>Segunda String: (En el ejemplo usaremos el NullClient) <code>NullDLL</code></p>
+            <img src="https://i.imgur.com/WhpxxY9.png" alt="PH2">
+            <p>Se copia y pega la ruta que aparece ahí en EJECUTAR</p>
+            <img src="https://i.imgur.com/SHOVp6j.png" alt="PH2">
+            <img src="https://i.imgur.com/QwrmO5p.png" alt="PH2">
+            <p>Ejemplo con el Reach DLL</p>
+            <img src="https://i.imgur.com/0h905TR.png" alt="PH2">
+            
+            <h3>Compatibilidad</h3>
+            <p>Ir a: <code>Equipo\HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store</code></p>
+            <p>Buscar nombres de cheats o .exe sospechosos.</p>
+            <img src="https://i.imgur.com/R0gnEv9.png" alt="Compatibilidad">
+            <p>Siguiendo en regedit hay que verificar que el usuario no tiene funciones desactivadas como “UserAssistView” o “ElementosRecientes”</p>
+            <h3>Funciones Desactivadas</h3>
+            <p>Ir a: <code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist</code></p>
+            <p>Si existe "NotLog", ban por ocultar registros.</p>
+            <img src="https://i.imgur.com/80Q06gk.png" alt="Funciones Desactivadas">
+            <p>Ir a: <code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</code></p>
+            <p>Si existe "NoRecentDocsHistory", ban por desactivar historial reciente.</p>
+            <img src="https://i.imgur.com/9aDPwkI.png" alt="Funciones Desactivadas">
+        </div>
+
+        <div class="section" id="powershell">
+            <h2>PowerShell</h2>
+            <p>Abrir PowerShell como administrador y ejecutar:</p>
+            <code>MMAgent</code>
+            <p></p>
+            <img src="https://i.imgur.com/mQAu6xT.png" alt="PowerShell">
+            <p>Si “ApplicationLaunchPrefetching” o “MemoryCompressive” están en false, ban por ya que el usuario desactivo la memoria comprimida y no guardara logs/registros de .exe etc “esto se considerá”.</p>
+            <code>gci -recurse -filter *.exe</code>
+            <p>Lista todos los .exe en memoria comprimida. Buscar nombres raros o de cheats.</p>
+            <p>Opcional: <code>gci -recurse -filter *.cfg</code> para configs de cheats.</p>
+            <img src="https://i.imgur.com/zZXNrkC.png" alt="PowerShell">
+        </div>
+
+
+        <div class="section" id="dps">
+            <h2>Proceso “DPS” (Diagnostic Policy Service)</h2>
+            <p>Muchos clientes con "self-destruct" reinician el proceso "DPS" (Servicio de Directivas de Diagnóstico) al eliminarse para ocultar rastros. Podemos verificar su estado y detectar manipulaciones.</p>
+            
+            <h3>Verificar estado con CMD</h3>
+            <p>Abrir CMD y ejecutar:</p>
+            <pre><code>sc query dps</code></pre>
+            <li>Si aparece "RUNNING", el proceso está activo y no se cerró nada recientemente.</li>
+            <li>Si aparece "STOPPED", indica que se cerraron procesos, lo cual es sospechoso.</li>
+            <img src="https://i.imgur.com/3xzEoNE.png" alt="Resultado sc query dps"> <!-- Reemplaza con una captura real -->
+            
+            <h3>Revisión en ProcessHacker</h3>
+            <p>Ejecutar ProcessHacker como administrador, buscar el proceso "svchost.exe":</p>
+            <li>Doble clic en "svchost.exe" > pestaña "General".</li>
+            <img src="https://i.imgur.com/QLIqcM0.png" alt="Propiedades DPS en ProcessHacker"> <!-- Imagen de ejemplo; ajusta según necesites -->
+            <li>Verificar la hora de inicio ("Started"). Si coincide con el momento en que el usuario fue congelado (frozeado), considerar ban.</li>
+            <img src="https://i.imgur.com/hlWyYoq.png" alt="Hora inicio DPS en ProcessHacker">
+            
+            <h3>Análisis de Memoria en DPS</h3>
+            <p>En ProcessHacker, analizar el proceso "svchost.exe" para buscar .exe modificados:</p>
+            <ol>
+                <li>Identificar el proceso que usa más MB en ProcessHacker (ordenar por "Private Bytes") y repetir el análisis anterior:</li>
+                <li>Ir a "Memory" > Desmarcar "Hide free regions" > "Strings".</li>
+                <li>Configurar: Escribir <code>4</code>, marcar "Image" y "Mapped", luego "OK".</li>
+                <li>Filtrar con "Contains (case-insensitive): <code>.exe</code>.</li>
+                <li>Revisar los resultados. Si aparecen .exe sospechosos o rutas repetidas (archivos reemplazados), considerar ban.</li>
+                <img src="https://i.imgur.com/Z4O2pZk.gif" alt="Verificación">
+            </ol>
+            <p>Nota: Los archivos reemplazados aparecerán varias veces en la lista, lo que indica posible manipulación.</p>
+
+        
+            <div class="section" id="executedprogramslist">
+            <h2>ExecutedProgramList</h2>
+            <p><a href="https://www.nirsoft.net/utils/executed_programs_list.html">Descargar ExecutedProgramsList</a> y ejecutarlo como administrador:</p>
+            <p>Este programa nos mostrará todos los archivos .exe ejecutados.</p>
+            <img src="https://i.imgur.com/EfWyNFj.png" alt="ExecutedProgramList">
+            <p>En el mismo programa podremos ver la última vez el cual se ejecutó tan solo moviendo hacia la derecha.</p>
+
+            <div class="section" id="winprefetch">
+            <h2>WinPrefetch (Opcional)</h2>
+            <p><a href="https://www.nirsoft.net/utils/win_prefetch_view.html">Descargar WinPrefetch</a> y ejecutarlo como administrador:</p>
+            <p>Este programa es similar a LastActivityView. Cada archivo .exe que se ejecuta deja un registro en la carpeta Prefetch, incluso si el archivo fue borrado después. Estos logs son útiles para detectar actividad reciente sospechosa.</p>
+            <img src="https://i.imgur.com/XUlYnDL.png" alt="WinPrefetch">
+            <p>Habrá que buscar entre todos los archivos los mas raros/ejecutados recientemente.</p>
+
+            <div class="section" id="processhacker">
+            <h2>ProcessHacker</h2>
+            <p><a href="https://sourceforge.net/projects/processhacker/">Descargar ProcessHacker</a> y ejecutarlo como administrador:</p>
+            
+            <h3>Servicio PCA</h3>
+            <p>Ejecutar: <code>Windows + R</code> y escribir <code>Services.msc</code></p>
+            <p>Buscar “Servicio Asistente para la compatibilidad de programas”. Si está “Detenido”, ban por “Modificaciones en SS”.</p>
+            <img src="https://i.imgur.com/UGw2406.png" alt="Servicio PCA">
+            
+            <h3>Explorer.exe</h3>
+            <p>Doble clic en “Explorer.exe” > “General”.</p>
+            <img src="https://i.imgur.com/vgh05O4.png" alt="Servicio PCA">
+            <p>Si el proceso fue iniciado cuando fue frozeado, significa que reinicio el proceso, si hizo eso no habrá registro alguno de lo que usó recientemente (pcaclient, etc), Considerar Ban</p>
+            <p>Si no sé ha reiniciado seguiremos con la SS, iremos a “Memory” > Desmarcar “Hide free regions” > “Strings”:</p>
+            <img src="https://i.imgur.com/JYviLk2.png" alt="Servicio PCA">
+            <ol>
+                <li>Escribir <code>4</code>, marcar “Image” y “Mapped”.</li>
+                <img src="https://i.imgur.com/DxpaWIQ.png" alt="Servicio PCA">
+                <li>Después de eso le damos a OK y nos aparecerá esto:</li>
+                <img src="https://i.imgur.com/IU5R9kW.png" alt="Servicio PCA">
+                <li>Le damos Clic a Filter > “Contains (case-insensitive)” > Escribir <code>File://</code>.</li>
+                <img src="https://i.imgur.com/UQEMOZz.png" alt="Servicio PCA">
+                <li>Repetir con <code>.exe</code>.</li>
+                <img src="https://i.imgur.com/dombNqL.png" alt="Servicio PCA">
+                <img src="https://i.imgur.com/E2lTq7g.png" alt="Servicio PCA">
+            </ol>
+            
+            <h3>Buscar archivos sospechosos.</h3>
+            <p>Después de esto volveremos al proceso de explorer.exe y buscaremos <code>Pcaclient</code> con los mismos filtros y le daremos OK.</p>
+            <img src="https://i.imgur.com/XEygNQ7.png" alt="Servicio PCA">
+            <p>Guardar “TRACE,0000” y revisar .exe ejecutados recientemente, para asegurarnos de que sean los programas legit y no estén cambiados iremos a esas rutas.</p>
+            <img src="https://i.imgur.com/oGUziFT.png" alt="Servicio PCA">
+            <img src="https://i.imgur.com/ffL9qky.png" alt="Servicio PCA">
+            <p>Opcional podemos usar el programa <code>Previous file recovery</code> y seleccionar esa rutas para ver si borro algo de ahi.</p>
+            
+            <h3>Otros Procesos</h3>
+            <p>Revisar “csrss” o “dwm” haremos los mismos pasos (Excepto lo de file://) con filtros <code>:\users</code> y <code>.exe</code>.</p>
+            <img src="https://i.imgur.com/cjnYAB4.png" alt="Servicio PCA">
+            <img src="https://i.imgur.com/CcbCB7S.png" alt="Servicio PCA">
+            <img src="https://i.imgur.com/IU5R9kW.png" alt="Servicio PCA">
+            <p>Después de eso le damos nuevamente a Filter y añadimos</p>
+            <img src="https://i.imgur.com/dombNqL.png" alt="Servicio PCA"> 
+            <p>Nos aparecerá algo así</p>
+            <img src="https://i.imgur.com/UHamcSa.png" alt="Servicio PCA">
+            <p>(Pueden hacer lo mismo en el proceso de “Registry” solo hay que tener cuidado ya que aparecen .exe y archivos de hace mucho tiempo.)</p>
+        </div>
+        
+        <div class="section" id="lastactivityview">
+            <h2>LastActivityView</h2>
+            <p><a href="https://www.nirsoft.net/utils/computer_activity_view.html">Descargar LastActivityView</a> y ejecutarlo como administrador:</p>
+            <h3>Uso General</h3>
+            <p>Esta herramienta muestra un registro de actividades recientes en el sistema (aplicaciones ejecutadas, archivos abiertos, etc.).</p>
+            <ol>
+                <li>Abrir el programa y esperar a que cargue la lista de eventos.</li>
+                <img src="https://i.imgur.com/66rDvGa.png" alt="LastActivityView">
+                <li>Ordenar por “Time” (hora) para ver las acciones más recientes.</li>
+                <img src="https://i.imgur.com/X3NsRKq.png" alt="LastActivityView">
+                <li>Buscar nombres sospechosos como “clicker”, “cheat”, “.jar”, “.exe” o “.dll” en “Filename” o “Full Path”.</li>
+                <li>Si encuentras evidencia de cheats ejecutados antes o durante la SS (ej. “AutoClicker.exe”), ban por “Modificaciones en SS o Complementos en SS”.</li>
+            </ol>
+
+            <h3>Consejos</h3>
+            <ul>
+                <li>Filtra por “Application” o “File” usando Ctrl+F para buscar palabras clave como “java”, “minecraft”, o “macro”.</li>
+                <img src="https://i.imgur.com/iHqlzkW.png" alt="LastActivityView">
+                <li>Exporta el informe (File > Save Selected Items) como evidencia.</li>
+                <img src="https://i.imgur.com/8lUzOco.png" alt="LastActivityView">
+                <img src="https://i.imgur.com/goaMxcK.png" alt="LastActivityView">
+                <p></p>
+                <img src="https://i.imgur.com/DcdXpyC.png" alt="LastActivityView">
+                <img src="https://i.imgur.com/LRW4CDC.png" alt="LastActivityView">
+            </ul>
+        </div>
+
+        <div class="section" id="usbdeview">
+            <h2>USBDeview</h2>
+            <p><a href="https://www.nirsoft.net/utils/usb_devices_view.html">Descargar USBDeview</a> y ejecutarlo como administrador:</p>
+            <h3>Uso General</h3>
+            <p>Esta herramienta lista todos los dispositivos USB conectados al sistema, incluso los desconectados previamente.</p>
+            <ol>
+                <li>Abrir USBDeview y revisar la lista de dispositivos.</li>
+                <img src="https://i.imgur.com/x9IkAM2.png" alt="USBDeview">
+                <li>Revisamos el apartado “Registry Time 1” para ver dispositivos conectados recientemente.</li>
+                <img src="https://i.imgur.com/3UZTOOz.png" alt="USBDeview">
+                <li>Si nos fijamos por “Registry Time 2” también es un apartado, pero este nos mostrará en la fecha que se conecto por 1 primera vez un dispositivo, por ejemplo.</li>
+                <img src="https://i.imgur.com/UzzLIqn.png" alt="USBDeview">
+                <li>En la imagen observamos 3 USB OPTICAL MOUSE, pero esos 3 son 1 mouse, si nos fijamos donde dice USB Composite Device ese nos mostrará en la parte de Registry time 2, la primera vez que se conecto el USB del mouse.</li>
+                <img src="https://i.imgur.com/OagNuq4.png" alt="USBDeview">
+                <li>Buscar dispositivos sospechosos como ratones USB genéricos o teclados con macros integrados (ej. “HID-compliant mouse” con fechas recientes).</li>
+                <img src="https://i.imgur.com/PBCjq0A.png" alt="USBDeview">
+                <li>Si un dispositivo USB coincide con la hora de conexión/desconexión al empezar la SS o minutos antes de estar en su anydesk esto ya sería sancionable por intentar esconder un mouse con macros.</li>
+            </ol>
+            
+            <h3>Consejos</h3>
+            <ul>
+                <li>Revisa “VendorID” y “ProductID” para identificar marcas conocidas de hardware con macros (Razer, Logitech, etc.).</li>
+            </ul>
+        </div>
+
+        <div class="section" id="dps">
+            <h2>Proceso “DPS” (Diagnostic Policy Service)</h2>
+            <p>Muchos clientes con "self-destruct" reinician el proceso "DPS" (Servicio de Directivas de Diagnóstico) al eliminarse para ocultar rastros. Podemos verificar su estado y detectar manipulaciones.</p>
+            
+            <h3>Verificar estado con CMD</h3>
+            <p>Abrir CMD y ejecutar:</p>
+            <pre><code>sc query dps</code></pre>
+            <li>Si aparece "RUNNING", el proceso está activo y no se cerró nada recientemente.</li>
+            <li>Si aparece "STOPPED", indica que se cerraron procesos, lo cual es sospechoso.</li>
+            <img src="https://i.imgur.com/RuaHoxq.png" alt="Resultado sc query dps"> <!-- Reemplaza con una captura real -->
+            
+            <h3>Revisión en ProcessHacker</h3>
+            <p>Ejecutar ProcessHacker como administrador, buscar el proceso "DPS":</p>
+            <li>Doble clic en "DPS" > pestaña "General".</li>
+            <img src="https://i.imgur.com/vgh05O4.png" alt="Propiedades DPS en ProcessHacker"> <!-- Imagen de ejemplo; ajusta según necesites -->
+            <li>Verificar la hora de inicio ("Start time"). Si coincide con el momento en que el usuario fue congelado (frozeado), ban por "Modificaciones en SS".</li>
+            
+            <h3>Análisis de Memoria en DPS</h3>
+            <p>En ProcessHacker, analizar el proceso "DPS" para buscar .exe modificados:</p>
+            <ol>
+                <li>Ir a "Memory" > Desmarcar "Hide free regions" > "Strings".</li>
+                <li>Configurar: Escribir <code>4</code>, marcar "Image" y "Mapped", luego "OK".</li>
+                <li>Filtrar con: <code>.exe</code>.</li>
+                <img src="https://i.imgur.com/DxpaWIQ.png" alt="Strings en DPS"> <!-- Imagen de ejemplo -->
+                <li>Revisar los resultados. Si aparecen .exe sospechosos o rutas repetidas (archivos reemplazados), ban por "Modificaciones en SS".</li>
+            </ol>
+            <p>Nota: Los archivos reemplazados aparecerán varias veces en la lista, lo que indica posible manipulación.</p>
+            
+            <h3>Proceso con Más Memoria</h3>
+            <p>Identificar el proceso que usa más MB en ProcessHacker (ordenar por "Private Bytes") y repetir el análisis anterior:</p>
+            <li>Filtrar con <code>.exe</code> en "Strings".</li>
+            <li>Buscar .exe modificados o sospechosos recientemente.</li>
+        </div>
+        <div class="section" id="dlls">
+            <h2>DLLs Sospechosos</h2>
+            <p>Buscar en cualquier proceso:</p>
+            <ul>
+                <li><code>420.dll</code> (Injection clicker)</li>
+                <li><code>ARTEX64.dll</code> (Injection clicker)</li>
+                <li><code>LSquad.dll</code> (String cleaner)</li>
+                <li><code>Kangaroo.dll</code> (Crack genérico)</li>
+                <li><code>DoNotAobScanMemory.dll</code> (Inyección de cheats)</li>
+            </ul>
+            <p>Si aparecen, ban por “Modificaciones en SS”.</p>
+        </div>
+
+        <div class="section" id="discord">
+            <h2>Discord</h2>
+            <p>En ProcessHacker, buscar “discord”:</p>
+            <ol>
+                <li>Memory > Desmarcar “Hide free regions” > Strings > “4”, “Image”, “Mapped”.</li>
+                <img src="https://i.imgur.com/aaTRH3Z.png" alt="Discord">
+                <li>Filter > “Contains (case-insensitive)” > <code>cdn.discordapp.com</code>.</li>
+                <img src="https://i.imgur.com/jhdcEkH.png" alt="Discord">
+                <li>Repetir con <code>attachments</code>.</li>
+                <img src="https://i.imgur.com/cPzm89Y.png" alt="Discord">
+                <li>Buscar .exe, .dll o .jar descargados.</li>
+                <img src="https://i.imgur.com/xysfBE3.png" alt="Discord">
+            </ol>
+        </div>
+
+        <div class="section" id="macros">
+            <h2>Macros</h2>
+            <h3>Razer Synapse</h3>
+            <p>Ir a: <code>C:\Users\%username%\AppData\Local\Razer</code></p>
+            <p>Revisar “logs” > “macros”. Si está modificado recientemente, ban por “Modificaciones en SS”.</p>
+
+            <h3>Logitech</h3>
+            <p>Ir a: <code>C:\Users\%username%\AppData\Local\LGhub\accounts</code></p>
+            <p>Si “.settings” está modificado recientemente, ban.</p>
+
+            <h3>RedDragon</h3>
+            <p>Ir a: <code>C:\Users\%username%\AppData\Roaming\REDRAGON Gaming Mouse</code></p>
+            <p>Revisar “Profile”. Si los .proof están modificados antes de la SS, ban.</p>
+        </div>
+
+        <div class="section" id="linux">
+            <h2>Guía para Linux</h2>
+               <li>Preguntar qué distribución usa (Ubuntu, Mint, etc.).</li>
+               <img src="https://i.imgur.com/MHAXwRD.png" alt="Linux">
+               <li>Descargar AnyDesk: <a href="https://anydesk.com/es/downloads/linux">Link</a>.</li>
+               <li>Ordenar carpetas por fecha de modificación.</li>
+               <img src="https://i.imgur.com/ekSGh6J.png" alt="Linux">
+               <li><code>Ctrl + H</code> > Revisar <code>.minecraft</code> (mods, logs, etc.).</li>
+               <img src="https://i.imgur.com/klFolfA.png" alt="Linux">
+               <img src="https://i.imgur.com/RRwt5me.png" alt="Linux">
+               <img src="https://i.imgur.com/ZBcikdE.png" alt="Linux">
+               <li>Buscar autoclickers obvios en el buscador (AutoClicker, ApolloClicker, etc.).</li>
+               <img src="https://i.imgur.com/HpXobgZ.png" alt="Linux">
+               <li>Terminal: <code>history</code> para comandos recientes.</li>
+               <img src="https://i.imgur.com/PPTGNsY.png" alt="Linux">
+               <img src="https://i.imgur.com/YuZZXur.png" alt="Linux">
+               <li>Filtrar: <code>history | grep .jar</code>, <code>history | grep clicker</code>, <code>history | grep misplace</code>, <code>history | grep javaw</code>, <code>history | grep .Minecraft</code>, <code>history | grep click</code></li>
+               <img src="https://i.imgur.com/qgNXp4o.png" alt="Linux">
+               <li><code>dpkg --get-selections</code> para programas instalados.</li>
+        </div>
+
+        <div class="section" id="extras">
+            <h2>Extras</h2>
+            <h3>DLL Flags</h3>
+            <p>Ejecutar en CMD: <code>regsvr32 C:\Windows\System32\nombre.dll</code> o <code>regsvr32 C:\Users\User\Downloads\nombre.dll</code>, esta va dependiendo de la ubicación, nombre del dll.</p>
+            <img src="https://i.imgur.com/bZW60KD.png" alt="DLL">
+            
+            <h3>Anti Tamper</h3>
+            <p>Buscar “Anti Tamper” en Inicio y desactivarlo si está activado.</p>
+            <img src="https://i.imgur.com/WrNvNk3.png" alt="AntiTamper">
+            
+            <h3>SmartScreen (Solo si algo falla)</h3>
+            <p>Inicio > “Smartscreen” > “Control de aplicaciones y navegador” > Desactivar las primeras 2 opciones.</p>
+            <img src="https://i.imgur.com/4nz9aWt.png" alt="SmartScreen">
+            <img src="https://i.imgur.com/tMu9Ius.png" alt="SmartScreen">
+            
+            <h3>DNS Cache</h3>
+            <p>PowerShell: <code>Get-DnsClientCache</code>. Revisar dominios recientes (ej. "vape.gg", “dreamclient.xyz”, "cucklord.pro", etc).</p>
+            <img src="https://i.imgur.com/iR1d2R4.png" alt="DNS Cache">
+            
+            <h3>C# Cheats</h3>
+            <p>En “dllhost”, buscar <code>DoNotAobScanMemory.dll</code>. Si aparece, considerar ban.</p>
+            <img src="https://i.imgur.com/YPzXEEA.png" alt="C# Cheats">
+            
+            <h3>Programas Ilegales</h3>
+            <p>Hay muchos programas los cuales se pueden usar para bypassear screenshares’s o usarlos como macros/autoclick etc, algunos de ellos son: Iobit Unlocker (Bypassear) - AutoHotKey - Macro recorder, etc. Considerar ban.</p>
+            <img src="https://i.imgur.com/DcQnT6j.png" alt="IObit Unistaller">
+            <img src="https://i.imgur.com/hEau5Cn.png" alt="AutoHotKey">
+            <img src="https://i.imgur.com/ekhFMCe.png" alt="Macro Recorder">
+            
+            <h3>Bloqueo de Funciones</h3>
+            <p>Errores al abrir ProcessHacker, Administrador de Tareas, etc., Considerar ban ya que intenta bloquear las funciones para hacer SS.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>
+            <span class="update-info">Actualizado el 01/03/2025 13:06 P.M.</span>
+            <span class="separator">✦</span>
+            <span class="creator">Creado por Kaspercito</span>
+        </p>
+    </footer>
+    <button id="scrollTop">↑</button>
+    <div id="lightbox">
+        <img id="lightboxImg">
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const correctPassword = atob('T2xpdmVy');
+    const passwordPrompt = document.getElementById('passwordPrompt');
+    const content = document.getElementById('content');
+    const accessButton = document.getElementById('accessButton');
+    const passwordInput = document.getElementById('passwordInput');
+
+    // Para depurar: imprime la contraseña esperada en la consola
+    console.log('Contraseña esperada:', correctPassword);
+
+    if (!passwordPrompt || !content || !accessButton || !passwordInput) {
+        console.error('Falta un elemento en el DOM:', { passwordPrompt, content, accessButton, passwordInput });
+        return;
+    }
+
+    function checkPassword() {
+        const input = passwordInput.value.trim(); // Elimina espacios al inicio y final
+        console.log('Entrada del usuario:', input); // Para depurar
+        console.log('Comparación:', input === correctPassword); // Para depurar
+
+        if (input === correctPassword) {
+            passwordPrompt.style.display = 'none';
+            content.style.display = 'block';
+            console.log('Acceso concedido');
+        } else {
+            alert('Contraseña incorrecta. Intenta de nuevo.');
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    }
+
+    passwordPrompt.style.display = 'block';
+    content.style.display = 'none';
+    passwordInput.focus();
+
+    accessButton.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+        
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 15 : 50;
+        const particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * (isMobile ? 1 : 2),
+                speedY: (Math.random() - 0.5) * (isMobile ? 1 : 2)
+            });
+        }
+    
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(77, 121, 255, 0.5)';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+            });
+            requestAnimationFrame(animate);
+        }
+        if (!isMobile) animate();
+    
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    
+        const searchBar = document.getElementById('searchBar');
+        if (searchBar) {
+            searchBar.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.trim().toLowerCase();
+    
+                document.querySelectorAll('.highlight').forEach(highlight => {
+                    const parent = highlight.parentNode;
+                    parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                    parent.normalize();
+                });
+    
+                document.querySelectorAll('.section').forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    const sectionHasMatch = text.includes(searchTerm);
+    
+                    section.style.display = sectionHasMatch || !searchTerm ? 'block' : 'none';
+    
+                    if (searchTerm && sectionHasMatch) {
+                        const textNodes = getTextNodes(section);
+                        textNodes.forEach(node => {
+                            const nodeText = node.textContent;
+                            const lowerNodeText = nodeText.toLowerCase();
+                            let index = lowerNodeText.indexOf(searchTerm);
+    
+                            if (index !== -1) {
+                                const fragment = document.createDocumentFragment();
+                                let lastIndex = 0;
+    
+                                while (index !== -1) {
+                                    if (index > lastIndex) {
+                                        fragment.appendChild(document.createTextNode(
+                                            nodeText.substring(lastIndex, index)
+                                        ));
+                                    }
+    
+                                    const highlightSpan = document.createElement('span');
+                                    highlightSpan.className = 'highlight';
+                                    highlightSpan.textContent = nodeText.substring(index, index + searchTerm.length);
+                                    fragment.appendChild(highlightSpan);
+    
+                                    lastIndex = index + searchTerm.length;
+                                    index = lowerNodeText.indexOf(searchTerm, lastIndex);
+                                }
+    
+                                if (lastIndex < nodeText.length) {
+                                    fragment.appendChild(document.createTextNode(
+                                        nodeText.substring(lastIndex)
+                                    ));
+                                }
+    
+                                node.parentNode.replaceChild(fragment, node);
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    
+        function getTextNodes(node) {
+            const textNodes = [];
+            const walker = document.createTreeWalker(
+                node,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(n) {
+                        const parent = n.parentElement;
+                        if (parent && (parent.tagName === 'CODE' || parent.tagName === 'A' || parent.classList.contains('highlight'))) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+    
+            let currentNode;
+            while (currentNode = walker.nextNode()) {
+                textNodes.push(currentNode);
+            }
+            return textNodes;
+        }
+    
+        const scrollTopBtn = document.getElementById('scrollTop');
+        if (scrollTopBtn) {
+            window.addEventListener('scroll', () => {
+                scrollTopBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+            });
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        if (lightbox && lightboxImg) {
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightbox.style.display = 'block';
+                });
+            });
+            lightbox.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+            });
+        }
+    });
+    </script>
+</body>
+</html>
